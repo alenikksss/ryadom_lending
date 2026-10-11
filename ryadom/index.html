@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Рядом — поддержка между сессиями</title>
+<meta name="description" content="Telegram-бот «Рядом»: поддержка между сессиями терапии, 24/7. Дыхание, дневник, практики самопомощи, анонимное комьюнити.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/adaptive.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+<symbol id="moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></symbol>
+<symbol id="waves" viewBox="0 0 24 24"><path d="M2 9c2.5-3 4.5-3 7 0s4.5 3 7 0 3.5-2 6 0"/><path d="M2 15c2.5-3 4.5-3 7 0s4.5 3 7 0 3.5-2 6 0"/></symbol>
+<symbol id="bubble" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/><path d="M9 10.5h6"/></symbol>
+<symbol id="exit" viewBox="0 0 24 24"><path d="M9 4H5v16h4"/><path d="M15 8l4 4-4 4M19 12H9"/></symbol>
+<symbol id="duo" viewBox="0 0 24 24"><circle cx="9" cy="12" r="6"/><circle cx="15" cy="12" r="6"/></symbol>
+<symbol id="rings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="10"/></symbol>
+<symbol id="leaf" viewBox="0 0 24 24"><path d="M5 19c0-9 5-14 14-14 0 9-5 14-14 14z"/><path d="M5 19l8-8"/></symbol>
+<symbol id="diary" viewBox="0 0 24 24"><path d="M6 3h11a2 2 0 0 1 2 2v16H8a2 2 0 0 1-2-2z"/><path d="M10 8h6M10 12h6"/></symbol>
+<symbol id="circle" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><circle cx="5.5" cy="10" r="2.2"/><circle cx="18.5" cy="10" r="2.2"/><path d="M6.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/></symbol>
+<symbol id="eyeoff" viewBox="0 0 24 24"><path d="M3 12s3.5-6 9-6 9 6 9 6-3.5 6-9 6-9-6-9-6z"/><circle cx="12" cy="12" r="2.5"/><path d="M4 4l16 16"/></symbol>
+<symbol id="bridge" viewBox="0 0 24 24"><path d="M3 17c3-8 15-8 18 0M3 17h18"/><path d="M8 12v5M12 10v7M16 12v5"/></symbol>
+<symbol id="shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></symbol>
+<symbol id="phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol>
+<symbol id="send" viewBox="0 0 24 24"><path d="M21 3L10 14"/><path d="M21 3l-7 18-4-7-7-4z"/></symbol>
+<symbol id="cam" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6"/></symbol>
+<symbol id="bell" viewBox="0 0 24 24"><path d="M6 17V11a6 6 0 0 1 12 0v6l1.5 2h-15z"/><path d="M10 21h4"/></symbol>
+<linearGradient id="pg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E8DCC8"/><stop offset="1" stop-color="#D4A5A5"/></linearGradient>
+<radialGradient id="cg"><stop offset="0" stop-color="#F3E3C0"/><stop offset="1" stop-color="#C9A876" stop-opacity="0"/></radialGradient>
+</defs>
+</svg>
+
+<header class="hero">
+  <nav>
+    <b>Рядом</b>
+    <div><a href="#znakomo">Знакомо?</a><a href="#vnutri">Что внутри</a><a href="#bezopasnost">Безопасность</a></div>
+  </nav>
+  <div class="sky" aria-hidden="true">
+    <i class="ring"></i><i class="ring"></i><i class="ring"></i>
+    <svg class="lotus" viewBox="0 0 200 200">
+      <ellipse class="rp" cx="100" cy="158" rx="70" ry="13" fill="none" stroke="#E8DCC8" stroke-width="1" style="--d:0s"/>
+      <ellipse class="rp" cx="100" cy="158" rx="70" ry="13" fill="none" stroke="#D4A5A5" stroke-width="1" style="--d:-3s"/>
+      <ellipse class="rp" cx="100" cy="158" rx="70" ry="13" fill="none" stroke="#7B8FA1" stroke-width="1" style="--d:-6s"/>
+      <g fill="url(#pg)" stroke="#E8DCC8" stroke-opacity=".55" stroke-width=".8">
+        <path class="p" style="--a:-66deg;--d:-.6s" fill-opacity=".45" d="M100 150C118 122 118 88 100 60C82 88 82 122 100 150Z"/>
+        <path class="p" style="--a:66deg;--d:-.6s" fill-opacity=".45" d="M100 150C118 122 118 88 100 60C82 88 82 122 100 150Z"/>
+        <path class="p" style="--a:-42deg;--d:-.3s" fill-opacity=".6" d="M100 150C118 122 118 88 100 60C82 88 82 122 100 150Z"/>
+        <path class="p" style="--a:42deg;--d:-.3s" fill-opacity=".6" d="M100 150C118 122 118 88 100 60C82 88 82 122 100 150Z"/>
+        <path class="p" style="--a:-20deg;--d:0s" fill-opacity=".75" d="M100 150C118 122 118 88 100 60C82 88 82 122 100 150Z"/>
+        <path class="p" style="--a:20deg;--d:0s" fill-opacity=".75" d="M100 150C118 122 118 88 100 60C82 88 82 122 100 150Z"/>
+        <path class="p" style="--a:0deg;--d:.2s" fill-opacity=".9" d="M100 150C118 122 118 88 100 60C82 88 82 122 100 150Z"/>
+      </g>
+      <circle class="core" cx="100" cy="128" r="22" fill="url(#cg)"/>
+    </svg>
+  </div>
+  <div class="hero-body">
+    <h1>Рядом</h1>
+    <p class="sub">Поддержка между сессиями. Бот, который рядом 24/7.</p>
+    <div class="cta">
+      <a class="btn main" href="https://t.me/ryadom_psychological_bot">Запустить бота</a>
+      <a class="btn ghost" href="#znakomo">Узнать больше</a>
+    </div>
+    <p class="slogan">Ты не один. Здесь тебе помогут, поддержат и, главное, не осудят.</p>
+  </div>
+</header>
+
+<main>
+<section id="znakomo">
+  <div class="wrap">
+    <h2 class="rv">Знакомо?</h2>
+    <div class="grid4">
+      <article class="card pain rv"><div class="ic"><svg class="i"><use href="#moon"/></svg></div><p>Накрывает ночью, а написать некому</p></article>
+      <article class="card pain rv"><div class="ic"><svg class="i"><use href="#waves"/></svg></div><p>Паника в метро, техники забываю</p></article>
+      <article class="card pain rv"><div class="ic"><svg class="i"><use href="#bubble"/></svg></div><p>Стыдно писать психологу вне сессии</p></article>
+      <article class="card pain rv"><div class="ic"><svg class="i"><use href="#exit"/></svg></div><p>Терапия закончилась, боюсь скатиться</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="features" id="vnutri">
+  <div class="wrap">
+    <h2 class="rv">Что внутри</h2>
+    <p class="lead rv">Пять вещей, которые помогают дожить до следующей сессии и не потерять себя после неё.</p>
+    <div class="rail" tabindex="0" aria-label="Возможности бота">
+      <article class="card"><div class="ic"><svg class="i"><use href="#duo"/></svg></div><h3>Бот-компаньон 24/7</h3><p>Я рядом, не осуждаю, не устаю. Можно писать в три часа ночи.</p></article>
+      <article class="card"><div class="ic"><svg class="i"><use href="#rings"/></svg></div><h3>Карточки поддержки</h3><p>Дыхание, заземление, SOS. Короткие шаги на случай, когда накрыло и слова не находятся.</p></article>
+      <article class="card"><div class="ic"><svg class="i"><use href="#leaf"/></svg></div><h3>Практики самопомощи</h3><p>Техники, которые помогают успокоиться и вернуться в ресурс.</p></article>
+      <article class="card"><div class="ic"><svg class="i"><use href="#diary"/></svg></div><h3>Дневник</h3><p>Подсказки для записей, трекинг состояния и рефлексия. Видно, как ты меняешься.</p></article>
+      <article class="card"><div class="ic"><svg class="i"><use href="#circle"/></svg></div><h3>Анонимное комьюнити</h3><p>Люди с похожим опытом. Можно просто читать, можно рассказать.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="kak">
+  <div class="wrap">
+    <h2 class="rv">Как это работает</h2>
+    <div class="steps">
+      <div class="step rv"><h3>Видишь посты в соцсетях</h3><p>И переходишь в Telegram-бот.</p></div>
+      <div class="step rv"><h3>Запускаешь бота</h3><p>И получаешь поддержку.</p></div>
+      <div class="step rv"><h3>Ведёшь дневник</h3><p>И видишь свой прогресс.</p></div>
+      <div class="step rv"><h3>Заходишь в комьюнити</h3><p>И находишь понимание.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="safe" id="bezopasnost">
+  <div class="wrap box">
+    <div class="rv">
+      <h2>Здесь безопасно</h2>
+      <p class="lead">Мы бережно относимся к тому, что ты приносишь сюда, и честно говорим, чем не являемся.</p>
+    </div>
+    <div class="list">
+      <div class="card rv"><div class="ic"><svg class="i"><use href="#eyeoff"/></svg></div><h3>Анонимность</h3><p>Имя и личные данные не нужны.</p></div>
+      <div class="card rv"><div class="ic"><svg class="i"><use href="#bridge"/></svg></div><h3>Не заменяем терапию</h3><p>Мы мост между сессиями, а не вместо них.</p></div>
+      <div class="card rv"><div class="ic"><svg class="i"><use href="#shield"/></svg></div><h3>Модерация</h3><p>В комьюнити следят за уважением и тишиной от токсичности.</p></div>
+      <div class="card rv"><div class="ic"><svg class="i"><use href="#phone"/></svg></div><h3>Если совсем тяжело</h3><p>Позвони на горячую линию: <a href="tel:88002000122">8-800-2000-122</a></p></div>
+    </div>
+  </div>
+</section>
+
+<section id="soobschestvo">
+  <div class="wrap">
+    <h2 class="rv">Ты не один в этом</h2>
+    <p class="lead rv">Тревога и усталость — не слабость, а очень распространённый опыт.</p>
+    <div class="stats">
+      <div class="rv"><b>301 млн</b><span>человек живут с тревожными расстройствами</span><i>ВОЗ</i></div>
+      <div class="rv"><b>970 млн</b><span>человек, то есть каждый восьмой, живут с психическим расстройством</span><i>ВОЗ, 2019</i></div>
+      <div class="rv"><b>280 млн</b><span>человек живут с депрессией</span><i>ВОЗ</i></div>
+      <div class="rv"><b>+25%</b><span>рост тревоги и депрессии в первый год пандемии</span><i>ВОЗ, 2022</i></div>
+      <div class="rv"><b>44%</b><span>людей в стрессе</span><i>Gallup</i></div>
+      <div class="rv"><b>60%</b><span>не обращаются за помощью</span><i>по данным исследований</i></div>
+      <div class="rv"><b>50%</b><span>психических состояний начинаются до 14 лет</span><i>ВОЗ</i></div>
+      <div class="rv"><b>1 трлн $</b><span>теряет мировая экономика в год из-за депрессии и тревоги</span><i>ВОЗ</i></div>
+    </div>
+  </div>
+</section>
+
+<section class="join">
+  <div class="wrap">
+    <h2 class="rv">Стань частью</h2>
+    <p class="lead rv">Начать можно с одного сообщения.</p>
+    <div class="grid3">
+      <article class="card rv"><div class="ic"><svg class="i"><use href="#duo"/></svg></div><h3>Мне нужна поддержка</h3><p>Запусти бота и напиши, как ты сейчас.</p><a class="btn main" href="https://t.me/ryadom_psychological_bot">Запустить бота</a></article>
+      <article class="card rv"><div class="ic"><svg class="i"><use href="#circle"/></svg></div><h3>Хочу помогать</h3><p>Присоединяйся к волонтёрам и будь рядом с теми, кому тяжело.</p><a class="btn ghost" href="#volunteer">Стать волонтёром</a></article>
+      <article class="card rv"><div class="ic"><svg class="i"><use href="#bell"/></svg></div><h3>Хочу быть в курсе</h3><p>Подпишись на канал: новости проекта, практики и тёплые слова.</p><a class="btn ghost" href="https://t.me/+mS-C9UvielE5NDli">Подписаться на канал</a></article>
+    </div>
+
+    <form class="card vform rv" id="volunteer" novalidate>
+      <h3>Анкета волонтёра</h3>
+      <label>ФИО
+        <input type="text" name="fio" autocomplete="name" required placeholder="Иванова Анна Сергеевна">
+      </label>
+      <label>Чем хочешь заниматься
+        <textarea name="what" rows="4" required placeholder="Например: вести чат, модерировать, писать тексты, помогать с дизайном"></textarea>
+      </label>
+      <button class="btn main" type="submit">Отправить заявку</button>
+      <p class="note" id="vmsg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><b>Рядом</b>Поддержка между сессиями.</div>
+    <div class="links">
+      <a class="btn ghost sm" href="https://t.me/+mS-C9UvielE5NDli" target="_blank" rel="noopener"><svg class="i"><use href="#send"/></svg>Telegram-канал</a>
+      <a class="btn ghost sm" href="https://www.instagram.com/ryadom.space.care?vrfl=MXFzc2I3Nzl5aDcxNw%3D%3D&amp;utm_source=qr" target="_blank" rel="noopener"><svg class="i"><use href="#cam"/></svg>Instagram</a>
+    </div>
+    <div class="hot">Горячая линия<a href="tel:88002000122">8-800-2000-122</a></div>
+    <p class="fine">Мы не заменяем терапию. Если тебе угрожает опасность, звони в экстренные службы.</p>
+  </div>
+</footer>
+
+<script src="js/script.js" defer></script>
+</body>
+</html>

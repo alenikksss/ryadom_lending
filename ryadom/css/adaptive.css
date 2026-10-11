@@ -1,0 +1,4 @@
+/* Адаптив: планшеты и телефоны (подключается последним) */
+@media(max-width:1100px){.stats{grid-template-columns:1fr 1fr}}
+@media(max-width:960px){.grid4,.steps,.stats{grid-template-columns:1fr 1fr}.safe .box,.grid3{grid-template-columns:1fr}.list{grid-template-columns:1fr}}
+@media(max-width:560px){.grid4,.steps,.stats{grid-template-columns:1fr}nav a{display:none}.vform{padding:28px}}
